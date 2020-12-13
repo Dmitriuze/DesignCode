@@ -12,6 +12,7 @@
 		0A0A55AC258636FE00A5CF0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0A55AB258636FE00A5CF0D /* Assets.xcassets */; };
 		0A0A55AF258636FE00A5CF0D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A0A55AE258636FE00A5CF0D /* Preview Assets.xcassets */; };
 		0A0A55B8258639DC00A5CF0D /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A55B7258639DC00A5CF0D /* ColorExtensions.swift */; };
+		0A0A55BD258676A300A5CF0D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A55BC258676A300A5CF0D /* MenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		0A0A55AE258636FE00A5CF0D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0A0A55B0258636FE00A5CF0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A0A55B7258639DC00A5CF0D /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		0A0A55BC258676A300A5CF0D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				0A0A55A7258636FA00A5CF0D /* DesignCodeApp.swift */,
 				0A0A55A9258636FA00A5CF0D /* ContentView.swift */,
+				0A0A55BC258676A300A5CF0D /* MenuView.swift */,
 				0A0A55AB258636FE00A5CF0D /* Assets.xcassets */,
 				0A0A55BA258639E100A5CF0D /* Extensions */,
 				0A0A55B0258636FE00A5CF0D /* Info.plist */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A0A55AA258636FA00A5CF0D /* ContentView.swift in Sources */,
+				0A0A55BD258676A300A5CF0D /* MenuView.swift in Sources */,
 				0A0A55A8258636FA00A5CF0D /* DesignCodeApp.swift in Sources */,
 				0A0A55B8258639DC00A5CF0D /* ColorExtensions.swift in Sources */,
 			);
