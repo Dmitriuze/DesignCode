@@ -29,7 +29,13 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
                     ForEach(sectionData, id: \.id) { section in
-                        SectionView(section: section)
+                        GeometryReader { geometry in
+                            SectionView(section: section)
+                                .rotation3DEffect(
+                                    .degrees((Double(geometry.frame(in: .global).minX - 30) / -20)),
+                                    axis: (x: 0, y: 1, z: 0))
+                        }
+                        .frame(width: 275, height: 275)
                     }
                 }
                 .padding(30)
