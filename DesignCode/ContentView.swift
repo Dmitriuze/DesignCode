@@ -8,37 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var mainCardIsShown = false
+    
     var body: some View {
         ZStack {
             TitleView()
+                .blur(radius: self.mainCardIsShown ? 20 : 0)
+                .animation(.default)
                 
             BackCardView()
-                .background(Color.card4)
+                .background(self.mainCardIsShown ? Color.card3 : Color.card4)
                 .cornerRadius(20)
                 .shadow(radius: 20)
-                .offset(x: 0, y: -40)
+                .offset(x: 0, y: self.mainCardIsShown ? -400 : -40)
                 .scaleEffect(0.9)
-                .rotationEffect(.degrees(10))
+                .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 10))
                 .rotation3DEffect(
                     .degrees(10),
                     axis: (x: 1.0, y: 0.0, z: 0.0))
                 .blendMode(.hardLight)
+                .animation(.easeInOut(duration: 0.4))
+            
             BackCardView()
-                .background(Color.card3)
+                .background(self.mainCardIsShown ? Color.card4 : Color.card3)
                 .cornerRadius(20)
                 .shadow(radius: 20)
-                .offset(x: 0, y: -20)
+                .offset(x: 0, y: self.mainCardIsShown ? -200 : -20)
                 .scaleEffect(0.95)
-                .rotationEffect(.degrees(5))
+                .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 5))
                 .rotation3DEffect(
                     .degrees(5),
                     axis: (x: 1.0, y: 0.0, z: 0.0))
                 .blendMode(.hardLight)
+                .animation(.easeInOut(duration: 0.3))
             
             CardView()
                 .blendMode(.hardLight)
+                .onTapGesture {
+                    self.mainCardIsShown.toggle()
+                }
             
             ButtonCardView()
+                .blur(radius: self.mainCardIsShown ? 30 : 0)
+                .animation(.default)
         }
     }
 }
