@@ -9,31 +9,29 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var mainCardIsShown = false
+    @State private var mainCardIsDraggin = false
     @State private var mainCardPosition = CGSize.zero
     @State private var bottomCardIsShown = false
+    @State private var bottomCardPosition = CGSize.zero
+    @State private var bottomCardIsFull = false
     
     var body: some View {
         ZStack {
             TitleView()
                 .opacity(self.bottomCardIsShown ? 0.6 : 1)
                 .offset(y: self.bottomCardIsShown ? -200 : 0)
-                .blur(radius: self.mainCardIsShown ? 20 : 0)
-                .animation(
-                    Animation
-                        .default
-                        .delay(0.1)
-                )
+                .blur(radius: self.mainCardIsDraggin ? 20 : 0)
+                .animation(Animation.default.delay(0.1))
             
             BackCardView()
-                .background(self.mainCardIsShown ? Color.card3 : Color.card4)
+                .background(self.mainCardIsDraggin ? Color.card3 : Color.card4)
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
                 .shadow(radius: 20)
-                .offset(x: 0, y: self.mainCardIsShown ? -400 : -40)
+                .offset(x: 0, y: self.mainCardIsDraggin ? -400 : -40)
                 .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .offset(y: self.bottomCardIsShown ? -165 : 0)
                 .scaleEffect(self.bottomCardIsShown ? 1 : 0.9)
-                .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 10))
+                .rotationEffect(.degrees(self.mainCardIsDraggin ? 0 : 10))
                 .rotationEffect(.degrees(self.bottomCardIsShown ? -10 : 0))
                 .rotation3DEffect(
                     .degrees(self.bottomCardIsShown ? 0 : 10),
@@ -42,14 +40,14 @@ struct ContentView: View {
                 .animation(.easeInOut(duration: 0.5))
             
             BackCardView()
-                .background(self.mainCardIsShown ? Color.card4 : Color.card3)
+                .background(self.mainCardIsDraggin ? Color.card4 : Color.card3)
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
                 .shadow(radius: 20)
-                .offset(x: 0, y: self.mainCardIsShown ? -200 : -20)
+                .offset(x: 0, y: self.mainCardIsDraggin ? -200 : -20)
                 .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .offset(y: self.bottomCardIsShown ? -120 : 0)
                 .scaleEffect(self.bottomCardIsShown ? 1.1 : 0.95)
-                .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 5))
+                .rotationEffect(.degrees(self.mainCardIsDraggin ? 0 : 5))
                 .rotationEffect(.degrees(self.bottomCardIsShown ? -5 : 0))
                 .rotation3DEffect(
                     .degrees(self.bottomCardIsShown ? 0 : 5),
@@ -58,7 +56,6 @@ struct ContentView: View {
                 .animation(.easeInOut(duration: 0.3))
             
             CardView()
-                
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
                 .scaleEffect(self.bottomCardIsShown ? 1.2 : 1)
                 .shadow(radius: 20)
@@ -67,25 +64,52 @@ struct ContentView: View {
                 .animation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0))
                 .blendMode(.hardLight)
                 .onTapGesture {
-                    //                    self.mainCardIsShown.toggle()
                     self.bottomCardIsShown.toggle()
                 }
                 .gesture(
                     DragGesture()
                         .onChanged {value in
                             self.mainCardPosition = value.translation
-                            self.mainCardIsShown = true
+                            self.mainCardIsDraggin = true
                         }
                         .onEnded {_ in
                             self.mainCardPosition = CGSize.zero
-                            self.mainCardIsShown = false
+                            self.mainCardIsDraggin = false
                         }
                 )
             
             ButtonCardView()
                 .offset(x: 0, y: self.bottomCardIsShown ? 360 : 1000)
-                .blur(radius: self.mainCardIsShown ? 30 : 0)
-                .animation(.timingCurve(0.2,0.2,0.8,1, duration: 0.4))
+                .offset(y: self.bottomCardPosition.height)
+                .blur(radius: self.mainCardIsDraggin ? 30 : 0)
+                .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.5))
+                .gesture(
+                    DragGesture()
+                        .onChanged {value in
+                            self.bottomCardPosition = value.translation
+                            if self.bottomCardPosition.height < -150 {
+                                self.bottomCardIsFull = true
+                            } else {
+                                self.bottomCardIsFull = false
+                            }
+                            
+                            if self.bottomCardPosition.height < -300 {
+                                self.bottomCardPosition.height = -300
+                            }
+                        }
+                        .onEnded {_ in
+                            if self.bottomCardPosition.height > 50 {
+                                self.bottomCardIsShown = false
+                                self.bottomCardIsFull = false
+                            } else if (self.bottomCardPosition.height < -100 && !self.bottomCardIsFull) || (self.bottomCardPosition.height < -250 && self.bottomCardIsFull) {
+                                self.bottomCardIsFull = true
+                                self.bottomCardPosition.height = -300
+                            } else {
+                                self.bottomCardIsFull = false
+                                self.bottomCardPosition.height = .zero
+                            }
+                        }
+                )
         }
     }
 }
@@ -164,6 +188,7 @@ struct ButtonCardView: View {
             
             Spacer()
         }
+        .frame(maxWidth: .infinity)
         .padding(.top, 8)
         .padding(.horizontal, 20)
         .background(Color.white)
