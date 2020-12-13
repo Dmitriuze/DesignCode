@@ -9,8 +9,42 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            VStack {
+                Spacer()
+                
+            }
+            .frame(width: 300, height: 220, alignment: .center)
+            .background(Color.blue)
+            .cornerRadius(20)
+            .shadow(radius: 20)
+            .offset(x: 0, y: -20)
+            VStack {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text("UI Design")
+                            .font(.title)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                        Text("Certificate")
+                            .foregroundColor(.accent)
+                    }
+                    Spacer()
+                    Image("Logo1")
+                    
+                }.padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 20))
+                Spacer()
+                Image("Card1")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 300, height: 110, alignment: .top)
+                
+            }
+            .frame(width: 340, height: 220)
+            .background(Color.black)
+            .cornerRadius(20)
+            .shadow(radius: 20)
+        }
     }
 }
 
