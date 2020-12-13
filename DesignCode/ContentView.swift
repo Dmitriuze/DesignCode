@@ -10,18 +10,20 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var mainCardIsShown = false
+    @State private var mainCardPosition = CGSize.zero
     
     var body: some View {
         ZStack {
             TitleView()
                 .blur(radius: self.mainCardIsShown ? 20 : 0)
                 .animation(.default)
-                
+            
             BackCardView()
                 .background(self.mainCardIsShown ? Color.card3 : Color.card4)
                 .cornerRadius(20)
                 .shadow(radius: 20)
                 .offset(x: 0, y: self.mainCardIsShown ? -400 : -40)
+                .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .scaleEffect(0.9)
                 .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 10))
                 .rotation3DEffect(
@@ -35,6 +37,7 @@ struct ContentView: View {
                 .cornerRadius(20)
                 .shadow(radius: 20)
                 .offset(x: 0, y: self.mainCardIsShown ? -200 : -20)
+                .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .scaleEffect(0.95)
                 .rotationEffect(.degrees(self.mainCardIsShown ? 0 : 5))
                 .rotation3DEffect(
@@ -44,10 +47,23 @@ struct ContentView: View {
                 .animation(.easeInOut(duration: 0.3))
             
             CardView()
+                .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
+                .animation(.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0))
                 .blendMode(.hardLight)
                 .onTapGesture {
                     self.mainCardIsShown.toggle()
                 }
+                .gesture(
+                    DragGesture()
+                        .onChanged {value in
+                            self.mainCardPosition = value.translation
+                            self.mainCardIsShown = true
+                        }
+                        .onEnded {_ in
+                            self.mainCardPosition = CGSize.zero
+                            self.mainCardIsShown = false
+                        }
+                )
             
             ButtonCardView()
                 .blur(radius: self.mainCardIsShown ? 30 : 0)
