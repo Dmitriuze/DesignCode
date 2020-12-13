@@ -54,7 +54,7 @@ struct ContentView: View {
                     axis: (x: 1.0, y: 0.0, z: 0.0))
                 .blendMode(.hardLight)
                 .animation(.easeInOut(duration: 0.3))
-            
+            Text("\(self.bottomCardPosition.height)").offset(y: -400)
             CardView()
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
                 .scaleEffect(self.bottomCardIsShown ? 1.2 : 1)
@@ -87,10 +87,9 @@ struct ContentView: View {
                     DragGesture()
                         .onChanged {value in
                             self.bottomCardPosition = value.translation
-                            if self.bottomCardPosition.height < -150 {
-                                self.bottomCardIsFull = true
-                            } else {
-                                self.bottomCardIsFull = false
+                            
+                            if self.bottomCardIsFull {
+                                self.bottomCardPosition.height += -300
                             }
                             
                             if self.bottomCardPosition.height < -300 {
