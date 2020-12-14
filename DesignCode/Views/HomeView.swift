@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     
+    @ObservedObject private var homeVM = HomeViewModel()
+    
     @Binding var showProfile: Bool
     @State var showUpdate: Bool = false
     
@@ -33,7 +35,7 @@ struct HomeView: View {
                         .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0.0, y: 10)
                 })
                 .sheet(isPresented: $showUpdate, content: {
-                    ContentView()
+                    UpdateListView()
                 })
             }
             .padding(.horizontal)
@@ -43,7 +45,7 @@ struct HomeView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 30) {
-                    ForEach(sectionData, id: \.id) { section in
+                    ForEach(self.homeVM.sections, id: \.id) { section in
                         GeometryReader { geometry in
                             SectionView(section: section)
                                 .rotation3DEffect(
@@ -98,17 +100,6 @@ struct SectionView: View {
 }
 
 
-struct Section: Identifiable {
-    var id = UUID()
-    var title: String
-    var text: String
-    var logo: String
-    var image: Image
-    var color: Color
-}
 
-let sectionData = [
-    Section(title: "Prototypes designs in SwiftUI", text: "18 Sections", logo: "Logo1", image: Image("Card1"), color: .card1),
-    Section(title: "Build a SwiftUI App", text: "20 Sections", logo: "Logo1", image: Image("Card2"), color: .card2),
-    Section(title: "SwiftUI Advanced", text: "20 Sections", logo: "Logo1", image: Image("Card3"), color: .card3)
-]
+
+

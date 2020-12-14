@@ -31,6 +31,6 @@ struct UpdateDetailView: View {
 
 struct UpdateDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateDetailView(update: updateData[0])
+        UpdateDetailView(update: Update.getAll()[0])
     }
 }
