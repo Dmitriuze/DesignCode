@@ -54,7 +54,7 @@ struct ContentView: View {
                     axis: (x: 1.0, y: 0.0, z: 0.0))
                 .blendMode(.hardLight)
                 .animation(.easeInOut(duration: 0.3))
-            Text("\(self.bottomCardPosition.height)").offset(y: -400)
+            
             CardView()
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
                 .scaleEffect(self.bottomCardIsShown ? 1.2 : 1)
@@ -82,7 +82,7 @@ struct ContentView: View {
                 .offset(x: 0, y: self.bottomCardIsShown ? 360 : 1000)
                 .offset(y: self.bottomCardPosition.height)
                 .blur(radius: self.mainCardIsDraggin ? 30 : 0)
-                .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.5))
+                .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.3))
                 .gesture(
                     DragGesture()
                         .onChanged {value in
