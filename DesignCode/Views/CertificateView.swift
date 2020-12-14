@@ -78,8 +78,8 @@ struct CertificateView: View {
                         }
                 )
             
-            ButtonCardView()
-                .offset(x: 0, y: self.bottomCardIsShown ? 360 : 1000)
+            BottomCardView()
+                .offset(y: self.bottomCardIsShown ? 160 : 1000)
                 .offset(y: self.bottomCardPosition.height)
                 .blur(radius: self.mainCardIsDraggin ? 30 : 0)
                 .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.3))
@@ -174,7 +174,8 @@ struct TitleView: View {
     }
 }
 
-struct ButtonCardView: View {
+struct BottomCardView: View {
+    
     var body: some View {
         VStack(spacing: 20) {
             RoundedRectangle(cornerRadius: 3)
@@ -185,11 +186,27 @@ struct ButtonCardView: View {
                 .font(.subheadline)
                 .lineSpacing(4)
             
+            HStack(spacing: 20) {
+                RingView(color1: #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1), color2: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), width: 88, height: 88, percent: 78, withAnimation: false)
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("SwiftUI").fontWeight(.bold)
+                    Text("12 of 12 sections completed\n10 hours spent so far")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .lineLimit(4)
+                }
+                .padding(20)
+                .background(Color.white)
+                .cornerRadius(20)
+                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 10)
+            }
+            
             Spacer()
         }
-        .frame(maxWidth: .infinity)
         .padding(.top, 8)
         .padding(.horizontal, 20)
+        .frame(maxWidth: .infinity)
         .background(Color.white)
         .cornerRadius(30)
         .shadow(radius: 20)
