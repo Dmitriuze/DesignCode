@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CertificateView: View {
     
     @State private var mainCardIsDraggin = false
     @State private var mainCardPosition = CGSize.zero
@@ -113,9 +113,9 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct CertificateView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        CertificateView()
     }
 }
 
