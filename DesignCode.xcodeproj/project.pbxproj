@@ -15,6 +15,7 @@
 		0A0A55BD258676A300A5CF0D /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A55BC258676A300A5CF0D /* MenuView.swift */; };
 		0A0A55C0258682D900A5CF0D /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0A55BF258682D900A5CF0D /* HomeScreenView.swift */; };
 		0A1529F9258690D9000CD0B8 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A1529F8258690D9000CD0B8 /* HomeView.swift */; };
+		0A5BC52425877258002B834A /* UpdateDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5BC52325877258002B834A /* UpdateDetailView.swift */; };
 		0A7B765325876CE60090C433 /* UpdateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B765225876CE60090C433 /* UpdateListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		0A0A55BC258676A300A5CF0D /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		0A0A55BF258682D900A5CF0D /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		0A1529F8258690D9000CD0B8 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		0A5BC52325877258002B834A /* UpdateDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDetailView.swift; sourceTree = "<group>"; };
 		0A7B765225876CE60090C433 /* UpdateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +70,7 @@
 				0A0A55BF258682D900A5CF0D /* HomeScreenView.swift */,
 				0A1529F8258690D9000CD0B8 /* HomeView.swift */,
 				0A7B765225876CE60090C433 /* UpdateListView.swift */,
+				0A5BC52325877258002B834A /* UpdateDetailView.swift */,
 				0A0A55AB258636FE00A5CF0D /* Assets.xcassets */,
 				0A0A55BA258639E100A5CF0D /* Extensions */,
 				0A0A55B0258636FE00A5CF0D /* Info.plist */,
@@ -163,6 +166,7 @@
 			files = (
 				0A0A55AA258636FA00A5CF0D /* ContentView.swift in Sources */,
 				0A0A55BD258676A300A5CF0D /* MenuView.swift in Sources */,
+				0A5BC52425877258002B834A /* UpdateDetailView.swift in Sources */,
 				0A0A55A8258636FA00A5CF0D /* DesignCodeApp.swift in Sources */,
 				0A1529F9258690D9000CD0B8 /* HomeView.swift in Sources */,
 				0A0A55C0258682D900A5CF0D /* HomeScreenView.swift in Sources */,

@@ -12,7 +12,7 @@ struct UpdateListView: View {
         NavigationView {
             List {
                 ForEach(updateData) {update in
-                    NavigationLink(destination: Text("1")) {
+                    NavigationLink(destination: UpdateDetailView(update: update)) {
                         HStack {
                             Image(update.image)
                                 .resizable()
