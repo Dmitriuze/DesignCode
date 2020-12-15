@@ -11,6 +11,7 @@ struct CourseListView: View {
     
     @ObservedObject private var courseListVM = CourseListViewModel()
     @State private var active = false
+    @State private var activeIndex: Int = -1
     var body: some View {
         
         ZStack {
@@ -27,8 +28,16 @@ struct CourseListView: View {
                     ForEach(courseListVM.courses.indices, id: \.self) { index in
                         GeometryReader { geometry in
                             
-                            CourseView(course: $courseListVM.courses[index], statusBarIsHiden: $active)
+                            CourseView(
+                                course: $courseListVM.courses[index],
+                                statusBarIsHiden: $active,
+                                index: index,
+                                activeIndex: $activeIndex
+                            )
                                 .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
+                            .opacity(self.activeIndex != index && self.active ? 0 : 1)
+                            .scaleEffect(self.activeIndex != index && self.active ? 0.5 : 1)
+                            .offset(x: self.activeIndex != index && self.active ? screen.width : 0)
                             
                         }
                         .frame(height: 280)
@@ -55,7 +64,8 @@ struct CourseView: View {
     
     @Binding var course: Course
     @Binding var statusBarIsHiden: Bool
-    
+    var index: Int
+    @Binding var activeIndex: Int
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -113,6 +123,11 @@ struct CourseView: View {
             .onTapGesture {
                 self.course.show.toggle()
                 self.statusBarIsHiden.toggle()
+                if self.course.show {
+                    self.activeIndex = index
+                } else {
+                    self.activeIndex = -1
+                }
             }
             
         }
