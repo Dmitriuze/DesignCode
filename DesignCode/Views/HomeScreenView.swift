@@ -10,24 +10,32 @@ import SwiftUI
 struct HomeScreenView: View {
     @State private var showProfile = false
     @State private var viewState = CGSize.zero
-        
+    @State private var showContent = false
+    
     var body: some View {
         ZStack {
             
             Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1))
                 .edgesIgnoringSafeArea(.all)
             
-            HomeView(showProfile: self.$showProfile)
-            .padding(.top, 44)
-            .background(Color.white)
-            .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 20)
-            .offset(y: self.showProfile ? self.viewState.height - 450 : 0)
-            .rotation3DEffect(.degrees(self.showProfile ? Double(self.viewState.height / 10) - 10 : 0),
-                axis: (x: 10.0, y: 0.0, z: 0.0))
-            .scaleEffect(self.showProfile ? 0.9 : 1)
-            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
-            .edgesIgnoringSafeArea(.all)
+            HomeView(showProfile: self.$showProfile, showContent: self.$showContent)
+                .padding(.top, 44)
+                .background(
+                    VStack {
+                        LinearGradient(gradient: Gradient(colors: [Color.background2, Color.white]), startPoint: .top, endPoint: .bottom)
+                            .frame(height: 200)
+                        Spacer()
+                    }
+                    .background(Color.white)
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
+                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 20)
+                .offset(y: self.showProfile ? self.viewState.height - 450 : 0)
+                .rotation3DEffect(.degrees(self.showProfile ? Double(self.viewState.height / 10) - 10 : 0),
+                                  axis: (x: 10.0, y: 0.0, z: 0.0))
+                .scaleEffect(self.showProfile ? 0.9 : 1)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+                .edgesIgnoringSafeArea(.all)
             
             MenuView()
                 .background(Color.black.opacity(0.001))
@@ -49,6 +57,34 @@ struct HomeScreenView: View {
                             self.viewState = .zero
                         }
                 )
+            
+            if self.showContent {
+                Color.white
+                    .edgesIgnoringSafeArea(.all)
+                
+                CertificateView()
+                
+                VStack {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "xmark")
+                            .frame(width: 36, height: 36)
+                            .foregroundColor(.white)
+                            .background(Color.black)
+                            .clipShape(Circle())
+                            .onTapGesture {
+                                self.showContent = false
+                            }
+                    }
+                    Spacer()
+                }
+                .transition(.move(edge: .bottom))
+                .animation(.spring(response: 0.6, dampingFraction: 0.8, blendDuration: 0))
+                .padding(.horizontal)
+                
+            }
+            
+            
         }
     }
 }
