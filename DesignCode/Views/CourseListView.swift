@@ -9,25 +9,29 @@ import SwiftUI
 
 struct CourseListView: View {
     
-    @State private var show = false
-    @State private var show2 = false
+    @ObservedObject private var courseListVM = CourseListViewModel()
     
     var body: some View {
         
         ScrollView {
             VStack(spacing: 30) {
-                CourseView(show: $show)
-                    .frame(height: show ? screen.height : 280)
-                
-                GeometryReader { geometry in
-                    
-                    CourseView(show: $show2)
-                        .offset(y: show2 ? -geometry.frame(in: .global).minY : 0)
-                    
+                Text("Courses")
+                    .font(.largeTitle).bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.leading, 30)
+                    .padding(.top, 30)
+                ForEach(courseListVM.courses.indices, id: \.self) { index in
+                    GeometryReader { geometry in
+                        
+                        CourseView(show: $courseListVM.courses[index].show, course: courseListVM.courses[index])
+                            .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
+                        
+                    }
+                    .frame(height: 280)
+                    .frame(maxWidth: courseListVM.courses[index].show ? .infinity : screen.width - 60, maxHeight: .infinity)
                 }
-                .frame(height: show2 ? screen.height : 280)
-                .frame(maxWidth: show2 ? .infinity : screen.width - 60, maxHeight: .infinity)
             }.frame(width: screen.width)
+            .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
         }
     }
 }
@@ -44,6 +48,8 @@ struct CourseListView_Previews: PreviewProvider {
 struct CourseView: View {
     
     @Binding var show: Bool
+    
+    var course: Course
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -65,14 +71,14 @@ struct CourseView: View {
             VStack {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 20){
-                        Text("SwiftUI Advanced")
+                        Text(course.title)
                             .font(.system(size: 24, weight: .bold))
-                        Text("20 sections")
+                        Text(course.subtitle)
                             .opacity(0.7)
                     }
                     Spacer()
                     ZStack {
-                        Image("Logo1").opacity(show ? 0 : 1)
+                        Image(uiImage: course.logo).opacity(show ? 0 : 1)
                         
                         Image(systemName: "xmark")
                             .font(.system(size: 16, weight: .medium))
@@ -85,7 +91,7 @@ struct CourseView: View {
                 }.foregroundColor(Color.white)
                 Spacer()
                 
-                Image(uiImage: #imageLiteral(resourceName: "Card2"))
+                Image(uiImage: course.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)
@@ -95,14 +101,15 @@ struct CourseView: View {
             .padding(show ? 40 : 20)
             .padding(.top, show ? 30 : 0)
             .frame(maxWidth: show ? .infinity : screen.width - 60, maxHeight: show ? screen.height / 2 : 280)
-            .background(Color(#colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)))
+            .background(Color(course.color))
             .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .shadow(color: Color(#colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)).opacity(0.3), radius: 20, x: 0.0, y: 20)
+            .shadow(color: Color(course.color).opacity(0.3), radius: 20, x: 0.0, y: 20)
             .onTapGesture {
                 self.show.toggle()
             }
             
         }
+        .frame(height: show ? screen.height : 280)
         .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
         .edgesIgnoringSafeArea(.all)
     }
