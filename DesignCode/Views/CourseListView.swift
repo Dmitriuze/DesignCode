@@ -12,10 +12,12 @@ struct CourseListView: View {
     @ObservedObject private var courseListVM = CourseListViewModel()
     @State private var active = false
     @State private var activeIndex: Int = -1
+    @State private var activeView = CGSize.zero
+    
     var body: some View {
         
         ZStack {
-            Color.black.opacity(active ? 0.3 : 0)
+            Color.black.opacity(Double(activeView.width / 500))
                 .animation(.linear)
                 .edgesIgnoringSafeArea(.all)
             ScrollView {
@@ -30,11 +32,12 @@ struct CourseListView: View {
                             
                             CourseView(
                                 course: $courseListVM.courses[index],
-                                statusBarIsHiden: $active,
+                                active: $active,
                                 index: index,
-                                activeIndex: $activeIndex
+                                activeIndex: $activeIndex,
+                                activeView: $activeView
                             )
-                                .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
+                            .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
                             .opacity(self.activeIndex != index && self.active ? 0 : 1)
                             .scaleEffect(self.activeIndex != index && self.active ? 0.5 : 1)
                             .offset(x: self.activeIndex != index && self.active ? screen.width : 0)
@@ -63,9 +66,10 @@ struct CourseListView_Previews: PreviewProvider {
 struct CourseView: View {
     
     @Binding var course: Course
-    @Binding var statusBarIsHiden: Bool
+    @Binding var active: Bool
     var index: Int
     @Binding var activeIndex: Int
+    @Binding var activeView: CGSize
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -122,7 +126,7 @@ struct CourseView: View {
             .shadow(color: Color(course.color).opacity(0.3), radius: 20, x: 0.0, y: 20)
             .onTapGesture {
                 self.course.show.toggle()
-                self.statusBarIsHiden.toggle()
+                self.active.toggle()
                 if self.course.show {
                     self.activeIndex = index
                 } else {
@@ -130,10 +134,35 @@ struct CourseView: View {
                 }
             }
             
+            
         }
         .frame(height: course.show ? screen.height : 280)
+        .scaleEffect(1 - activeView.width / 1000)
+        .rotation3DEffect(
+            .degrees(Double(self.activeView.width / 10)),
+            axis: (x: 0.0, y: 1.0, z: 0.0))
+        .hueRotation(.degrees(Double(self.activeView.width / 5)))
         .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+        .gesture(
+            course.show ?
+                DragGesture()
+                .onChanged {value in
+                    guard value.translation.width < 300  else { return }
+                    guard value.translation.width > 0 else { return }
+                    self.activeView = value.translation
+                    
+                }
+                .onEnded {value in
+                    if self.activeView.width > 50 {
+                        self.course.show = false
+                        self.active = false
+                        self.activeIndex = -1
+                    }
+                    self.activeView = .zero
+                }
+                : nil
+        )
         .edgesIgnoringSafeArea(.all)
     }
-
+    
 }
