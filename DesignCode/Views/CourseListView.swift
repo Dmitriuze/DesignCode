@@ -50,7 +50,9 @@ struct CourseListView: View {
                 }.frame(width: screen.width)
                 .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
             }
-        }
+        }.onAppear(perform: {
+            courseListVM.fetchData()
+        })
     }
 }
 
@@ -129,6 +131,7 @@ struct CourseView: View {
         .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
         
         .edgesIgnoringSafeArea(.all)
+        
     }
     
 }
