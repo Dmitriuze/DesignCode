@@ -29,6 +29,10 @@
 		0A5BC5832588AE43002B834A /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5BC5822588AE43002B834A /* CourseListView.swift */; };
 		0A7B765325876CE60090C433 /* UpdateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B765225876CE60090C433 /* UpdateListView.swift */; };
 		0A9021ED258B6283005A09C4 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021EC258B6283005A09C4 /* CourseDetailView.swift */; };
+		0A9021F0258B6EAF005A09C4 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021EF258B6EAF005A09C4 /* Data.swift */; };
+		0A9021F3258B70CB005A09C4 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021F2258B70CB005A09C4 /* PostListView.swift */; };
+		0A9021F7258B822D005A09C4 /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021F6258B822D005A09C4 /* PostListViewModel.swift */; };
+		0A9021FA258B82A7005A09C4 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021F9258B82A7005A09C4 /* PostsApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		0A5BC5822588AE43002B834A /* CourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		0A7B765225876CE60090C433 /* UpdateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateListView.swift; sourceTree = "<group>"; };
 		0A9021EC258B6283005A09C4 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
+		0A9021EF258B6EAF005A09C4 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		0A9021F2258B70CB005A09C4 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
+		0A9021F6258B822D005A09C4 /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
+		0A9021F9258B82A7005A09C4 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				0A0A55A7258636FA00A5CF0D /* DesignCodeApp.swift */,
+				0A9021FD258B82CF005A09C4 /* Services */,
 				0A0A55BA258639E100A5CF0D /* Extensions */,
 				0A5BC5432587B850002B834A /* Modifiers */,
 				0A5BC52D25877DA8002B834A /* Models */,
@@ -123,6 +132,7 @@
 			children = (
 				0A5BC52A25877D12002B834A /* Update.swift */,
 				0A5BC53325878191002B834A /* Section.swift */,
+				0A9021EF258B6EAF005A09C4 /* Data.swift */,
 				0A53977D258908A600D166EA /* Course.swift */,
 			);
 			path = Models;
@@ -134,6 +144,7 @@
 				0A5BC52625877C64002B834A /* UpdateListVeiewModel.swift */,
 				0A5BC536258781FA002B834A /* HomeViewModel.swift */,
 				0A5397802589096500D166EA /* CourseListViewModel.swift */,
+				0A9021F6258B822D005A09C4 /* PostListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -151,6 +162,7 @@
 				0A5BC5822588AE43002B834A /* CourseListView.swift */,
 				0A7B765225876CE60090C433 /* UpdateListView.swift */,
 				0A5BC52325877258002B834A /* UpdateDetailView.swift */,
+				0A9021F2258B70CB005A09C4 /* PostListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -161,6 +173,14 @@
 				0A5BC5442587B85F002B834A /* Modifiers.swift */,
 			);
 			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		0A9021FD258B82CF005A09C4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0A9021F9258B82A7005A09C4 /* PostsApi.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -238,13 +258,17 @@
 				0A9021ED258B6283005A09C4 /* CourseDetailView.swift in Sources */,
 				0A5BC52725877C64002B834A /* UpdateListVeiewModel.swift in Sources */,
 				0A5BC53A2587914A002B834A /* TabBarView.swift in Sources */,
+				0A9021FA258B82A7005A09C4 /* PostsApi.swift in Sources */,
 				0A5BC52B25877D12002B834A /* Update.swift in Sources */,
 				0A5BC5452587B85F002B834A /* Modifiers.swift in Sources */,
 				0A53977E258908A600D166EA /* Course.swift in Sources */,
 				0A5BC5402587A2D9002B834A /* RingView.swift in Sources */,
 				0A0A55BD258676A300A5CF0D /* MenuView.swift in Sources */,
+				0A9021F7258B822D005A09C4 /* PostListViewModel.swift in Sources */,
 				0A5BC5832588AE43002B834A /* CourseListView.swift in Sources */,
+				0A9021F0258B6EAF005A09C4 /* Data.swift in Sources */,
 				0A5BC53425878191002B834A /* Section.swift in Sources */,
+				0A9021F3258B70CB005A09C4 /* PostListView.swift in Sources */,
 				0A5BC52425877258002B834A /* UpdateDetailView.swift in Sources */,
 				0A0A55A8258636FA00A5CF0D /* DesignCodeApp.swift in Sources */,
 				0A5BC537258781FA002B834A /* HomeViewModel.swift in Sources */,
