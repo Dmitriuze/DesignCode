@@ -28,6 +28,7 @@
 		0A5BC57D2587BF4F002B834A /* Work_Sans in Resources */ = {isa = PBXBuildFile; fileRef = 0A5BC57C2587BF4F002B834A /* Work_Sans */; };
 		0A5BC5832588AE43002B834A /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5BC5822588AE43002B834A /* CourseListView.swift */; };
 		0A7B765325876CE60090C433 /* UpdateListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7B765225876CE60090C433 /* UpdateListView.swift */; };
+		0A9021ED258B6283005A09C4 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021EC258B6283005A09C4 /* CourseDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		0A5BC57C2587BF4F002B834A /* Work_Sans */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Work_Sans; sourceTree = "<group>"; };
 		0A5BC5822588AE43002B834A /* CourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		0A7B765225876CE60090C433 /* UpdateListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateListView.swift; sourceTree = "<group>"; };
+		0A9021EC258B6283005A09C4 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				0A0A55BF258682D900A5CF0D /* HomeScreenView.swift */,
 				0A5BC5392587914A002B834A /* TabBarView.swift */,
 				0A1529F8258690D9000CD0B8 /* HomeView.swift */,
+				0A9021EC258B6283005A09C4 /* CourseDetailView.swift */,
 				0A5BC5822588AE43002B834A /* CourseListView.swift */,
 				0A7B765225876CE60090C433 /* UpdateListView.swift */,
 				0A5BC52325877258002B834A /* UpdateDetailView.swift */,
@@ -232,6 +235,7 @@
 			files = (
 				0A0A55AA258636FA00A5CF0D /* CertificateView.swift in Sources */,
 				0A5397812589096500D166EA /* CourseListViewModel.swift in Sources */,
+				0A9021ED258B6283005A09C4 /* CourseDetailView.swift in Sources */,
 				0A5BC52725877C64002B834A /* UpdateListVeiewModel.swift in Sources */,
 				0A5BC53A2587914A002B834A /* TabBarView.swift in Sources */,
 				0A5BC52B25877D12002B834A /* Update.swift in Sources */,
