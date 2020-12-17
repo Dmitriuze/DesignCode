@@ -14,14 +14,13 @@ struct PostListView: View {
     var body: some View {
         List {
             ForEach(postListVM.posts, id: \.id) {post in
-                VStack(alignment: .leading) {
-                    Text(post.title.capitalized)
-                        .font(.title).bold()
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(post.title)
+                        .font(.system(.title, design: .serif)).bold()
+                    Text(post.body)
+                        .foregroundColor(.secondary)
                 }
             }
-        }
-        .onAppear {
-            postListVM.fetchPosts()
         }
     }
 }
