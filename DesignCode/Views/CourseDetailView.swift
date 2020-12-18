@@ -4,7 +4,7 @@
 //
 //  Created by Dmitry Bulykin on 17.12.2020.
 //
-
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct CourseDetailView: View {
@@ -45,8 +45,7 @@ struct CourseDetailView: View {
                 }.foregroundColor(Color.white)
                 
                 Spacer()
-                
-                Image(uiImage: course.image)
+                WebImage(url: course.image)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)

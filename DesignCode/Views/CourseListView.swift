@@ -4,7 +4,7 @@
 //
 //  Created by Dmitry Bulykin on 15.12.2020.
 //
-
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct CourseListView: View {
@@ -33,9 +33,9 @@ struct CourseListView: View {
                             CourseView(
                                 course: $courseListVM.courses[index],
                                 active: $active,
-                                index: index,
                                 activeIndex: $activeIndex,
-                                activeView: $activeView
+                                activeView: $activeView,
+                                index: index
                             )
                             .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
                             .opacity(self.activeIndex != index && self.active ? 0 : 1)
@@ -67,9 +67,10 @@ struct CourseView: View {
     
     @Binding var course: Course
     @Binding var active: Bool
-    var index: Int
     @Binding var activeIndex: Int
     @Binding var activeView: CGSize
+    
+    var index: Int
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -88,7 +89,7 @@ struct CourseView: View {
                 }.foregroundColor(Color.white)
                 Spacer()
                 
-                Image(uiImage: course.image)
+                WebImage(url: course.image, isAnimating: .constant(true))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(maxWidth: .infinity)
