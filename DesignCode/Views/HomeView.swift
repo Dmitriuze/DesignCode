@@ -29,10 +29,11 @@ struct HomeView: View {
                     
                     Button(action: { self.showUpdate.toggle() }, label: {
                         Image(systemName: "bell")
-                            .renderingMode(.original)
+//                            .renderingMode(.template)
+                            .foregroundColor(.primary)
                             .font(.system(size: 16, weight: .medium))
                             .frame(width: 36, height: 36)
-                            .background(Color.white)
+                            .background(Color.background3)
                             .clipShape(Circle())
                             .modifier(DoubleShadowModifier())
                     })
@@ -69,16 +70,18 @@ struct HomeView: View {
                     .padding(.bottom, 30)
                 }.offset(y: -30)
                 
-                Group {
-                    HStack {
-                        Text("Couses")
-                            .font(.title)
-                            .bold()
-                        Spacer()
-                    }.padding(.leading, 30)
-                
-                SectionView(section: homeVM.sections[2], width: screen.width - 50, height: 275)
-                }.offset(y: -60)
+//                Group {
+//                    HStack {
+//                        Text("Couses")
+//                            .font(.title)
+//                            .bold()
+//                        Spacer()
+//                    }.padding(.leading, 30)
+//
+//                SectionView(section: homeVM.sections[2], width: screen.width - 50, height: 275)
+//                }.offset(y: -60)
+                CourseListView()
+                    .offset(y: -100)
                 
                 Spacer()
             }
@@ -135,12 +138,11 @@ struct WatchRingsView: View {
                 RingView(color1: #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1), color2: #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1), width: 44, height: 44, percent: 68)
                 VStack(alignment: .leading, spacing: 4){
                     Text("6 minutes left").bold().modifier(FontModifier(style: .subheadline))
-                    
                     Text("Watched 10 minutes today").modifier(FontModifier(style: .caption))
                 }
                 
             }.padding(8)
-            .background(Color.white)
+            .background(Color.background3)
             .cornerRadius(20)
             .modifier(DoubleShadowModifier())
             
@@ -148,7 +150,7 @@ struct WatchRingsView: View {
                 RingView(color1: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), color2: #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1), width: 32, height: 32, percent: 54)
                 
             }.padding(8)
-            .background(Color.white)
+            .background(Color.background3)
             .cornerRadius(20)
             .modifier(DoubleShadowModifier())
             
@@ -156,7 +158,7 @@ struct WatchRingsView: View {
                 RingView(color1: #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 1), color2: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), width: 32, height: 32, percent: 32)
                 
             }.padding(8)
-            .background(Color.white)
+            .background(Color.background3)
             .cornerRadius(20)
             .modifier(DoubleShadowModifier())
         }

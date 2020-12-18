@@ -27,7 +27,9 @@ extension Color {
     
     static let card5 = Color("card5")
     
-    static let primary = Color("primary")
+    static let primaryColor = Color("primary")
     
-    static let secondary = Color("secondary")
+    static let secondaryColor = Color("secondary")
 }
+
+

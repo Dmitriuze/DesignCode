@@ -115,7 +115,7 @@ struct CourseView: View {
             
             if course.show {
                 CourseDetailView(course: $course, active: $active, activeIndex: $activeIndex, activeView: $activeView)
-                    .background(Color.white)
+                    .background(Color.background3)
                     .cornerRadius(30)
             }
             

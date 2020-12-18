@@ -11,8 +11,7 @@ import SwiftUI
 struct DesignCodeApp: App {
     var body: some Scene {
         WindowGroup {
-//            TabBarView()
-            CourseListView()
+            TabBarView()
         }
     }
 }
