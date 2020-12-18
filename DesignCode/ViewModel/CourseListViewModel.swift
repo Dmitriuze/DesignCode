@@ -4,25 +4,32 @@
 //
 //  Created by Dmitry Bulykin on 15.12.2020.
 //
+import SwiftUI
 import Contentful
 import Foundation
 
 class CourseListViewModel: ObservableObject {
     
-    @Published var courses: [Course]
+    @Published var courses: [Course] = []
     
-    let client = Contentful.Client(spaceId: "590jdx3i2vda", accessToken: "Pw1ecmmEuQRex33F7b2TK088_j7icfAbfK4tGKkWeNs")
     
     init() {
-        self.courses = Course.getAll()
-    }
-    
-    func fetchData() {
-        let querry = Query.where(contentTypeId: "course")
-        
-        client.fetchArray(of: Entry.self, matching: querry) { result in
-            print(result)
+        CoutentfulApi().fetchData(id: "course") {data in
+            data.forEach {item in
+                self.courses.append(
+                    Course(
+                        title: item.fields["title"] as! String,
+                        subtitle: item.fields["subtitle"] as! String,
+                        image: #imageLiteral(resourceName: "Card6"),
+                        logo: #imageLiteral(resourceName: "Logo1"),
+                        color: #colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1),
+                        show: false
+                    )
+                )
+            }
         }
     }
+    
+    
 
 }
