@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+
+
+func haptic(type: UINotificationFeedbackGenerator.FeedbackType) {
+    UINotificationFeedbackGenerator().notificationOccurred(type)
+}
+
+func impact(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+    UIImpactFeedbackGenerator(style: style).impactOccurred()
+}
+
 struct ButtonsView: View {
     
     var body: some View {
@@ -83,12 +93,14 @@ struct RectangleButton: View {
                 LongPressGesture(minimumDuration: 0.5, maximumDistance: 10)
                     .onChanged { value in
                         self.tap = true
+                        impact(style: .heavy)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                             self.tap = false
                         }
                     }
                     .onEnded { value in
                         self.press.toggle()
+                        haptic(type: .success)
                     }
             )
             
@@ -124,15 +136,15 @@ struct CircleButton: View {
                 Circle()
                     .fill(Color(#colorLiteral(red: 0.7607843137, green: 0.8164883852, blue: 0.9259157777, alpha: 1)))
                     .offset(x: press ? -3 : 3, y: press ? -3 : 3)
-                    .blur(radius: 3)
+                    .blur(radius: 8)
+                    .offset(x: -8, y: -8)
                 Circle()
                     .fill(
                 LinearGradient(gradient: Gradient(colors: [Color(press ? #colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 1, alpha: 1) : #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)), Color(press ?  #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) :#colorLiteral(red: 0.9411764706, green: 0.9411764706, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     )
-                    .padding(1)
-
             }
-            .blur(radius: 1)
+            .clipShape(Circle())
+            .blur(radius: 5)
         )
         .clipShape(Circle())
         .shadow(color: Color(press ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 0.7607843137, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 20, y: 20)
@@ -205,6 +217,7 @@ struct PayButton: View {
                     .degrees(180),
                     axis: (x: 1.0, y: 0.0, z: 0.0))
                 .shadow(color: Color(#colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)).opacity(0.3), radius: 5, x: 3, y: 3)
+                .opacity(press ? 0 : 1)
                 .animation(.easeInOut)
         )
         .shadow(color: Color(press ? #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0) : #colorLiteral(red: 0.7607843137, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 20, y: 20)

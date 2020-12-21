@@ -39,6 +39,7 @@
 		0A9021FA258B82A7005A09C4 /* PostsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9021F9258B82A7005A09C4 /* PostsApi.swift */; };
 		0A902201258B8539005A09C4 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A902200258B8539005A09C4 /* DataStore.swift */; };
 		0A902205258B8823005A09C4 /* Contentful in Frameworks */ = {isa = PBXBuildFile; productRef = 0A902204258B8823005A09C4 /* Contentful */; };
+		0AA5E6BB2590EE380044D277 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA5E6BA2590EE380044D277 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		0A9021F6258B822D005A09C4 /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
 		0A9021F9258B82A7005A09C4 /* PostsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsApi.swift; sourceTree = "<group>"; };
 		0A902200258B8539005A09C4 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
+		0AA5E6BA2590EE380044D277 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				0A5BC5392587914A002B834A /* TabBarView.swift */,
 				0A37AA11258CAE0D00FC19D1 /* BlurView.swift */,
 				0A37AA15258FCDAD00FC19D1 /* ButtonsView.swift */,
+				0AA5E6BA2590EE380044D277 /* LoginView.swift */,
 				0A1529F8258690D9000CD0B8 /* HomeView.swift */,
 				0A9021EC258B6283005A09C4 /* CourseDetailView.swift */,
 				0A5BC5822588AE43002B834A /* CourseListView.swift */,
@@ -307,6 +310,7 @@
 				0A9021F3258B70CB005A09C4 /* PostListView.swift in Sources */,
 				0A5BC52425877258002B834A /* UpdateDetailView.swift in Sources */,
 				0A0A55A8258636FA00A5CF0D /* DesignCodeApp.swift in Sources */,
+				0AA5E6BB2590EE380044D277 /* LoginView.swift in Sources */,
 				0A5BC537258781FA002B834A /* HomeViewModel.swift in Sources */,
 				0A1529F9258690D9000CD0B8 /* HomeView.swift in Sources */,
 				0A0A55C0258682D900A5CF0D /* HomeScreenView.swift in Sources */,
