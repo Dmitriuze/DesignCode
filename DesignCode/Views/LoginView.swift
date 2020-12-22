@@ -14,6 +14,7 @@ struct LoginView: View {
     @State private var isFocused = false
     @State private var showAlert = false
     @State private var alertMessage = "Somethink went wrong"
+    @State private var isLoading = false
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -28,7 +29,7 @@ struct LoginView: View {
                     .edgesIgnoringSafeArea(.bottom)
                 
                 CoverView()
-            
+                    .offset(y: isFocused ? -300 : 0)
                 VStack {
                     
                     HStack {
@@ -74,10 +75,10 @@ struct LoginView: View {
                 .frame(maxWidth: .infinity)
                 .background(BlurView(style: .systemMaterial))
                 .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
-                .shadow(color: Color.black.opacity(0.15), radius: 20, x: 0, y: 20)
+                .shadow(color: Color.black.opacity(0.2), radius: 20, x: 0, y: 20)
                 .padding(.horizontal)
                 .offset(y: 460)
-                
+                .offset(y: isFocused ? -300 : 0)
                 HStack {
                     
                     Text("Forgot password?")
@@ -86,26 +87,35 @@ struct LoginView: View {
                     Spacer()
                     
                     Button(action: {
-                        self.showAlert = true
                         self.hideKeyboard()
                         self.isFocused = false
+                        self.isLoading = true
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            self.isLoading = false
+                            self.showAlert = true
+                        }
                     }, label: {
                         Text("Log in").foregroundColor(.black)
                             .padding(12)
                             .padding(.horizontal, 30)
-                            .background(Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)))
+                            .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)), Color(#colorLiteral(red: 0, green: 0.5241669825, blue: 1, alpha: 1))]), startPoint: .topLeading, endPoint: .bottomTrailing))
                     })
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.3), radius: 20, x: 0, y: 20)
+                    .shadow(color: Color(#colorLiteral(red: 0, green: 0.7529411765, blue: 1, alpha: 1)).opacity(0.15), radius: 20, x: 0, y: 20)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .padding()
             }
-            .offset(y: isFocused ? -300 : 0)
             .animation(.easeInOut)
             .onTapGesture {
                 self.isFocused = false
                 self.hideKeyboard()
+            }
+            .blur(radius: isLoading ? 2 : 0)
+            
+            if isLoading {
+                LottieView(fileName: "loading")
+                    .frame(width: 250, height: 250)
             }
         }
         .alert(isPresented: $showAlert) {
