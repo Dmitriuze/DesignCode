@@ -21,6 +21,8 @@
 		0A4AF9022591E87000C42AE0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0A4AF9012591E87000C42AE0 /* Lottie */; };
 		0A4AF9062591E89500C42AE0 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4AF9052591E89500C42AE0 /* LottieView.swift */; };
 		0A4AF9092591EA1F00C42AE0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4AF9082591EA1F00C42AE0 /* LoadingView.swift */; };
+		0A4AF90C2591ED3D00C42AE0 /* cloud-server.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A4AF90B2591ED3D00C42AE0 /* cloud-server.json */; };
+		0A4AF90F2591EEE500C42AE0 /* SuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A4AF90E2591EEE500C42AE0 /* SuccessView.swift */; };
 		0A53977E258908A600D166EA /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A53977D258908A600D166EA /* Course.swift */; };
 		0A5397812589096500D166EA /* CourseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5397802589096500D166EA /* CourseListViewModel.swift */; };
 		0A5450C2258BB26D00043933 /* CoutentfulApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A5450C1258BB26D00043933 /* CoutentfulApi.swift */; };
@@ -62,6 +64,8 @@
 		0A37AA15258FCDAD00FC19D1 /* ButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsView.swift; sourceTree = "<group>"; };
 		0A4AF9052591E89500C42AE0 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		0A4AF9082591EA1F00C42AE0 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		0A4AF90B2591ED3D00C42AE0 /* cloud-server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cloud-server.json"; sourceTree = "<group>"; };
+		0A4AF90E2591EEE500C42AE0 /* SuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessView.swift; sourceTree = "<group>"; };
 		0A53977D258908A600D166EA /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		0A5397802589096500D166EA /* CourseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListViewModel.swift; sourceTree = "<group>"; };
 		0A5450C1258BB26D00043933 /* CoutentfulApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoutentfulApi.swift; sourceTree = "<group>"; };
@@ -185,9 +189,10 @@
 				0A5BC5392587914A002B834A /* TabBarView.swift */,
 				0A37AA11258CAE0D00FC19D1 /* BlurView.swift */,
 				0A37AA15258FCDAD00FC19D1 /* ButtonsView.swift */,
-				0AA5E6BA2590EE380044D277 /* LoginView.swift */,
 				0A1529F8258690D9000CD0B8 /* HomeView.swift */,
 				0A9021EC258B6283005A09C4 /* CourseDetailView.swift */,
+				0AA5E6BA2590EE380044D277 /* LoginView.swift */,
+				0A4AF90E2591EEE500C42AE0 /* SuccessView.swift */,
 				0A5BC5822588AE43002B834A /* CourseListView.swift */,
 				0A7B765225876CE60090C433 /* UpdateListView.swift */,
 				0A5BC52325877258002B834A /* UpdateDetailView.swift */,
@@ -226,6 +231,7 @@
 		0AE3B5942591E81200E348EC /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				0A4AF90B2591ED3D00C42AE0 /* cloud-server.json */,
 				0AE3B5952591E81200E348EC /* loading.json */,
 				0AE3B5962591E81200E348EC /* success.json */,
 			);
@@ -301,6 +307,7 @@
 			files = (
 				0AE3B5982591E81300E348EC /* success.json in Resources */,
 				0A5BC57D2587BF4F002B834A /* Work_Sans in Resources */,
+				0A4AF90C2591ED3D00C42AE0 /* cloud-server.json in Resources */,
 				0A0A55AF258636FE00A5CF0D /* Preview Assets.xcassets in Resources */,
 				0AE3B5972591E81300E348EC /* loading.json in Resources */,
 				0A0A55AC258636FE00A5CF0D /* Assets.xcassets in Resources */,
@@ -325,6 +332,7 @@
 				0A5BC52B25877D12002B834A /* Update.swift in Sources */,
 				0A5BC5452587B85F002B834A /* Modifiers.swift in Sources */,
 				0A37AA12258CAE0D00FC19D1 /* BlurView.swift in Sources */,
+				0A4AF90F2591EEE500C42AE0 /* SuccessView.swift in Sources */,
 				0A53977E258908A600D166EA /* Course.swift in Sources */,
 				0A5450C2258BB26D00043933 /* CoutentfulApi.swift in Sources */,
 				0A5BC5402587A2D9002B834A /* RingView.swift in Sources */,

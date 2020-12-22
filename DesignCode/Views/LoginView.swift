@@ -15,10 +15,26 @@ struct LoginView: View {
     @State private var showAlert = false
     @State private var alertMessage = "Somethink went wrong"
     @State private var isLoading = false
+    @State private var isSuccess = false
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
+    
+    func login() {
+        self.hideKeyboard()
+        self.isFocused = false
+        self.isLoading = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.isLoading = false
+//            self.showAlert = true
+            self.isSuccess = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.isSuccess = false
+        }
+    }
+    
     var body: some View {
         ZStack {
             Color.black
@@ -87,13 +103,7 @@ struct LoginView: View {
                     Spacer()
                     
                     Button(action: {
-                        self.hideKeyboard()
-                        self.isFocused = false
-                        self.isLoading = true
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            self.isLoading = false
-                            self.showAlert = true
-                        }
+                        self.login()
                     }, label: {
                         Text("Log in").foregroundColor(.black)
                             .padding(12)
@@ -111,11 +121,15 @@ struct LoginView: View {
                 self.isFocused = false
                 self.hideKeyboard()
             }
-            .blur(radius: isLoading ? 2 : 0)
+            .blur(radius: isLoading ? 1 : 0)
             
             if isLoading {
                 LottieView(fileName: "loading")
                     .frame(width: 250, height: 250)
+            }
+            
+            if isSuccess {
+                SuccessView()
             }
         }
         .alert(isPresented: $showAlert) {
@@ -176,9 +190,12 @@ struct CoverView: View {
                     .animation(Animation.linear(duration: 10).repeatForever(autoreverses: true))
             }
         )
-        .background(Image(uiImage: #imageLiteral(resourceName: "Card3"))
-                        .clipShape(RoundedRectangle(cornerRadius: isDragging ? 30.0 : 0, style: .continuous)).offset(x: viewState.height / -20, y: viewState.width / -20)
-                    , alignment: .bottom)
+        .background(
+            Image(uiImage: #imageLiteral(resourceName: "Card3"))
+                .clipShape(RoundedRectangle(cornerRadius: isDragging ? 30.0 : 0, style: .continuous))
+                .offset(x: viewState.height / -20, y: viewState.width / -20)
+            , alignment: .bottom
+        )
         .background(Color(#colorLiteral(red: 0.4117647059, green: 0.4705882353, blue: 0.9725490196, alpha: 1)))
         .clipShape(RoundedRectangle(cornerRadius: 30, style: .continuous))
         .rotation3DEffect(
