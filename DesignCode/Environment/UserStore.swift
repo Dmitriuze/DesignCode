@@ -10,7 +10,13 @@ import Foundation
 
 class UserStore: ObservableObject {
     
-    @Published var isLogged = false
+    @Published var isLogged: Bool = UserDefaults.standard.bool(forKey: "isLogged") {
+        didSet {
+            UserDefaults.standard.setValue(self.isLogged, forKey: "isLogged")
+        }
+    }
     @Published var showLogin = false
+    
+    
     
 }
