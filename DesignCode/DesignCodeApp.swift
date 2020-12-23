@@ -17,7 +17,9 @@ struct DesignCodeApp: App {
     var body: some Scene {
         WindowGroup {
 //            TabBarView()
-            LoginView()
+//            LoginView()
+            HomeScreenView()
+                .environmentObject(UserStore())
         }
     }
 }

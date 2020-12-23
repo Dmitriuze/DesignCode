@@ -16,6 +16,7 @@ struct LoginView: View {
     @State private var alertMessage = "Something went wrong"
     @State private var isLoading = false
     @State private var isSuccess = false
+    @EnvironmentObject var user: UserStore
     
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -25,20 +26,23 @@ struct LoginView: View {
         self.hideKeyboard()
         self.isFocused = false
         self.isLoading = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            
-           
-        }
+        
         Auth.auth().signIn(withEmail: email, password: password) { (relust, error) in
+            
+            self.isLoading = false
+            
             if error != nil {
                 self.alertMessage = error?.localizedDescription ?? ""
                 self.isLoading = false
                 self.showAlert = true
             } else {
                 self.isSuccess = true
+                self.user.isLogged = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.email = ""
+                    self.password = ""
                     self.isSuccess = false
-                    self.isLoading = false
+                    self.user.showLogin = false
                 }
             }
         }

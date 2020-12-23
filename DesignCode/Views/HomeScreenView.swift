@@ -11,6 +11,7 @@ struct HomeScreenView: View {
     @State private var showProfile = false
     @State private var viewState = CGSize.zero
     @State private var showContent = false
+    @EnvironmentObject var user: UserStore
     
     var body: some View {
         ZStack {
@@ -58,6 +59,29 @@ struct HomeScreenView: View {
                         }
                 )
             
+            if user.showLogin {
+                ZStack {
+                    
+                    LoginView()
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Image(systemName: "xmark")
+                                .frame(width: 36, height: 36)
+                                .foregroundColor(.white)
+                                .background(Color.black)
+                                .clipShape(Circle())
+                                .onTapGesture {
+                                    self.user.showLogin = false
+                                }
+                        }
+                        Spacer()
+                    }.padding()
+                    
+                }
+                .animation(.linear)
+            }
+            
             if self.showContent {
                 BlurView(style: .systemMaterial)
                     .edgesIgnoringSafeArea(.all)
@@ -92,23 +116,42 @@ struct HomeScreenView_Previews: PreviewProvider {
         HomeScreenView()
             .environment(\.colorScheme, .dark)
             .environment(\.sizeCategory, .extraExtraLarge)
+            .environmentObject(UserStore())
     }
 }
 
 struct AvatarView: View {
     
     @Binding var showProfile: Bool
+    @EnvironmentObject var user: UserStore
     
     var body: some View {
-        Button(action: {
-            self.showProfile.toggle()
-        }, label: {
-            Image("Avatar")
-                .renderingMode(.original)
-                .resizable()
-                .frame(width: 36, height: 36)
-                .clipShape(Circle())
-        })
+        VStack {
+            if user.isLogged {
+                Button(action: {
+                    self.showProfile.toggle()
+                }, label: {
+                    Image("Avatar")
+                        .renderingMode(.original)
+                        .resizable()
+                        .frame(width: 36, height: 36)
+                        .clipShape(Circle())
+                })
+            } else {
+                Button(action: {
+                    self.user.showLogin.toggle()
+                }, label: {
+                    Image(systemName: "person")
+                        .foregroundColor(.primary)
+                        .font(.system(size: 16, weight: .medium))
+                        .frame(width: 36, height: 36)
+                        .background(Color.background3)
+                        .clipShape(Circle())
+                        .modifier(DoubleShadowModifier())
+                    
+                })
+            }
+        }
     }
 }
 
