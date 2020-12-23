@@ -4,7 +4,7 @@
 //
 //  Created by Dmitry Bulykin on 21.12.2020.
 //
-
+import Firebase
 import SwiftUI
 
 struct LoginView: View {
@@ -13,7 +13,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var isFocused = false
     @State private var showAlert = false
-    @State private var alertMessage = "Somethink went wrong"
+    @State private var alertMessage = "Something went wrong"
     @State private var isLoading = false
     @State private var isSuccess = false
     
@@ -26,12 +26,21 @@ struct LoginView: View {
         self.isFocused = false
         self.isLoading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.isLoading = false
-//            self.showAlert = true
-            self.isSuccess = true
+            
+           
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.isSuccess = false
+        Auth.auth().signIn(withEmail: email, password: password) { (relust, error) in
+            if error != nil {
+                self.alertMessage = error?.localizedDescription ?? ""
+                self.isLoading = false
+                self.showAlert = true
+            } else {
+                self.isSuccess = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.isSuccess = false
+                    self.isLoading = false
+                }
+            }
         }
     }
     
