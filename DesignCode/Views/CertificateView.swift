@@ -30,7 +30,7 @@ struct CertificateView: View {
                 .offset(x: 0, y: self.mainCardIsDraggin ? -400 : -40)
                 .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .offset(y: self.bottomCardIsShown ? -165 : 0)
-                .scaleEffect(self.bottomCardIsShown ? 1 : 0.9)
+                .scaleEffect(self.bottomCardIsShown ? 0.95 : 0.9)
                 .rotationEffect(.degrees(self.mainCardIsDraggin ? 0 : 10))
                 .rotationEffect(.degrees(self.bottomCardIsShown ? -10 : 0))
                 .rotation3DEffect(
@@ -46,7 +46,7 @@ struct CertificateView: View {
                 .offset(x: 0, y: self.mainCardIsDraggin ? -200 : -20)
                 .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .offset(y: self.bottomCardIsShown ? -120 : 0)
-                .scaleEffect(self.bottomCardIsShown ? 1.1 : 0.95)
+                .scaleEffect(self.bottomCardIsShown ? 1.05 : 0.95)
                 .rotationEffect(.degrees(self.mainCardIsDraggin ? 0 : 5))
                 .rotationEffect(.degrees(self.bottomCardIsShown ? -5 : 0))
                 .rotation3DEffect(
@@ -57,7 +57,7 @@ struct CertificateView: View {
             
             CardView()
                 .clipShape(RoundedRectangle(cornerRadius: self.bottomCardIsShown ? 30 : 20, style: .continuous))
-                .scaleEffect(self.bottomCardIsShown ? 1.2 : 1)
+                .scaleEffect(self.bottomCardIsShown ? 1.1 : 1)
                 .shadow(radius: 20)
                 .offset(x: self.mainCardPosition.width, y: self.mainCardPosition.height)
                 .offset(y: self.bottomCardIsShown ? -100 : 0)
@@ -78,37 +78,40 @@ struct CertificateView: View {
                         }
                 )
             
-            BottomCardView()
-                .offset(y: self.bottomCardIsShown ? 160 : 1000)
-                .offset(y: self.bottomCardPosition.height)
-                .blur(radius: self.mainCardIsDraggin ? 30 : 0)
-                .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.3))
-                .gesture(
-                    DragGesture()
-                        .onChanged {value in
-                            self.bottomCardPosition = value.translation
-                            
-                            if self.bottomCardIsFull {
-                                self.bottomCardPosition.height += -300
+            GeometryReader { bounds in
+                BottomCardView()
+                    .offset(y: self.bottomCardIsShown ? bounds.size.height / 2 : bounds.size.height + bounds.safeAreaInsets.top + bounds.safeAreaInsets.bottom)
+                    .offset(y: self.bottomCardPosition.height)
+                    .blur(radius: self.mainCardIsDraggin ? 30 : 0)
+                    .animation(.timingCurve(1,0.11,0.41,1.06, duration: 0.3))
+                    .gesture(
+                        DragGesture()
+                            .onChanged {value in
+                                self.bottomCardPosition = value.translation
+                                
+                                if self.bottomCardIsFull {
+                                    self.bottomCardPosition.height += -300
+                                }
+                                
+                                if self.bottomCardPosition.height < -300 {
+                                    self.bottomCardPosition.height = -300
+                                }
                             }
-                            
-                            if self.bottomCardPosition.height < -300 {
-                                self.bottomCardPosition.height = -300
+                            .onEnded {_ in
+                                if self.bottomCardPosition.height > 50 {
+                                    self.bottomCardIsShown = false
+                                    self.bottomCardIsFull = false
+                                } else if (self.bottomCardPosition.height < -100 && !self.bottomCardIsFull) || (self.bottomCardPosition.height < -250 && self.bottomCardIsFull) {
+                                    self.bottomCardIsFull = true
+                                    self.bottomCardPosition.height = -300
+                                } else {
+                                    self.bottomCardIsFull = false
+                                    self.bottomCardPosition.height = .zero
+                                }
                             }
-                        }
-                        .onEnded {_ in
-                            if self.bottomCardPosition.height > 50 {
-                                self.bottomCardIsShown = false
-                                self.bottomCardIsFull = false
-                            } else if (self.bottomCardPosition.height < -100 && !self.bottomCardIsFull) || (self.bottomCardPosition.height < -250 && self.bottomCardIsFull) {
-                                self.bottomCardIsFull = true
-                                self.bottomCardPosition.height = -300
-                            } else {
-                                self.bottomCardIsFull = false
-                                self.bottomCardPosition.height = .zero
-                            }
-                        }
                 )
+            }
+            .ignoresSafeArea()
         }
     }
 }
@@ -116,6 +119,7 @@ struct CertificateView: View {
 struct CertificateView_Previews: PreviewProvider {
     static var previews: some View {
         CertificateView()
+            .previewLayout(PreviewLayout.fixed(width: 320, height: 667))
     }
 }
 
@@ -169,6 +173,9 @@ struct TitleView: View {
             }.padding()
             
             Image("Background1")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(minWidth: 320)
             Spacer()
         }
     }
@@ -206,9 +213,10 @@ struct BottomCardView: View {
         }
         .padding(.top, 8)
         .padding(.horizontal, 20)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: 720)
         .background(BlurView(style: .systemThickMaterial))
         .cornerRadius(30)
         .shadow(radius: 20)
+        .frame(maxWidth: .infinity)
     }
 }
