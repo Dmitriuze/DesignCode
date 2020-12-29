@@ -18,9 +18,9 @@ struct DesignCodeApp: App {
         WindowGroup {
 //            TabBarView()
 //            LoginView()
-//            HomeScreenView()
-//                .environmentObject(UserStore())
-            CourseListView()
+            HomeScreenView()
+                .environmentObject(UserStore())
+//            CourseListView()
         }
     }
 }

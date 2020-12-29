@@ -48,6 +48,7 @@ struct UpdateListView: View {
             .navigationBarTitle(Text("Updates"))
             .navigationBarItems(leading: EditButton(), trailing:  Button(action: {}, label: {Image(systemName: "plus")}))
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

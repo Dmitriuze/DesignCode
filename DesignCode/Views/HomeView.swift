@@ -14,6 +14,7 @@ struct HomeView: View {
     @Binding var showProfile: Bool
     @State var showUpdate: Bool = false
     @Binding var showContent: Bool
+    @Binding var viewState: CGSize
     
     var body: some View {
         GeometryReader { bounds in
@@ -61,7 +62,7 @@ struct HomeView: View {
                                 GeometryReader { geometry in
                                     SectionView(section: section)
                                         .rotation3DEffect(
-                                            .degrees((Double(geometry.frame(in: .global).minX - 30) / -20)),
+                                            .degrees((Double(geometry.frame(in: .global).minX - 30) / -getAngleMultiplier(bounds: bounds))),
                                             axis: (x: 0, y: 1, z: 0))
                                 }
                                 .frame(width: 275, height: 275)
@@ -86,14 +87,24 @@ struct HomeView: View {
                     Spacer()
                 }
                 .frame(width: bounds.size.width)
+                .offset(y: self.showProfile ? self.viewState.height - 450 : 0)
+                .rotation3DEffect(.degrees(self.showProfile ? Double(self.viewState.height / 10) - 10 : 0),
+                                  axis: (x: 10.0, y: 0.0, z: 0.0))
+                .scaleEffect(self.showProfile ? 0.9 : 1)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+            
             }
         }
     }
 }
 
+func getAngleMultiplier(bounds: GeometryProxy) -> Double {
+    bounds.size.width > 500 ? 80 : 20
+}
+
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(showProfile: .constant(true), showContent: .constant(true))
+        HomeView(showProfile: .constant(true), showContent: .constant(true), viewState: .constant(.zero))
     }
 }
 
