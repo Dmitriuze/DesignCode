@@ -16,6 +16,12 @@ struct HomeView: View {
     @Binding var showContent: Bool
     @Binding var viewState: CGSize
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @ObservedObject private var courseListVM = CourseListViewModel()
+    @State private var active = false
+    @State private var activeIndex: Int = -1
+    @State private var activeView = CGSize.zero
+    
     var body: some View {
         GeometryReader { bounds in
             ScrollView {
@@ -46,6 +52,7 @@ struct HomeView: View {
                     .padding(.horizontal)
                     .padding(.leading, 14)
                     .padding(.top, 30)
+                    .blur(radius: self.active ? 20 : 0)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         WatchRingsView()
@@ -55,6 +62,7 @@ struct HomeView: View {
                                 self.showContent = true
                             }
                     }
+                    .blur(radius: self.active ? 20 : 0)
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 30) {
@@ -71,6 +79,7 @@ struct HomeView: View {
                         .padding(30)
                         .padding(.bottom, 30)
                     }.offset(y: -30)
+                    .blur(radius: self.active ? 20 : 0)
                     
                     Group {
                         HStack {
@@ -79,8 +88,32 @@ struct HomeView: View {
                                 .bold()
                             Spacer()
                         }.padding(.leading, 30)
+                        .blur(radius: self.active ? 20 : 0)
                         
-                        SectionView(section: homeVM.sections[2], width: bounds.size.width - 50, height: 275)
+//                        SectionView(section: homeVM.sections[2], width: bounds.size.width - 50, height: 275)
+                        
+                        VStack(spacing: 30) {
+                            ForEach(courseListVM.courses.indices, id: \.self) { index in
+                                GeometryReader { geometry in
+                                    
+                                    CourseView(
+                                        course: $courseListVM.courses[index],
+                                        active: $active,
+                                        activeIndex: $activeIndex,
+                                        activeView: $activeView,
+                                        index: index,
+                                        bounds: bounds
+                                    )
+                                    .offset(y: courseListVM.courses[index].show ? -geometry.frame(in: .global).minY : 0)
+                                    .opacity(self.activeIndex != index && self.active ? 0 : 1)
+                                    .scaleEffect(self.activeIndex != index && self.active ? 0.5 : 1)
+                                    .offset(x: self.activeIndex != index && self.active ? bounds.size.width : 0)                            }
+                                    .frame(height: horizontalSizeClass == .regular ? 80 : 280)
+                                    .frame(maxWidth: courseListVM.courses[index].show ? 712 : getCardSize(bounds: bounds), maxHeight: .infinity)
+                                    .zIndex(courseListVM.courses[index].show ? 1 : 0)
+                            }
+                        }.padding(.bottom, 300)
+                        
                     }.offset(y: -60)
                     
                     

@@ -16,10 +16,10 @@ struct DesignCodeApp: App {
     
     var body: some Scene {
         WindowGroup {
-//            TabBarView()
+            TabBarView()
 //            LoginView()
-            HomeScreenView()
-                .environmentObject(UserStore())
+//            HomeScreenView()
+//                .environmentObject(UserStore())
 //            CourseListView()
         }
     }

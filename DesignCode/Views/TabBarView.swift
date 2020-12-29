@@ -20,13 +20,13 @@ struct TabBarView: View {
                     Image(systemName: "rectangle.stack.fill")
                     Text("Courses")
                 }
-            
-        }.edgesIgnoringSafeArea(.top)
+        }
     }
 }
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
         TabBarView()
+            .environmentObject(UserStore())
     }
 }
