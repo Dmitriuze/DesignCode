@@ -119,7 +119,7 @@ struct CertificateView: View {
 struct CertificateView_Previews: PreviewProvider {
     static var previews: some View {
         CertificateView()
-            .previewLayout(PreviewLayout.fixed(width: 320, height: 667))
+//            .previewLayout(PreviewLayout.fixed(width: 320, height: 667))
     }
 }
 
